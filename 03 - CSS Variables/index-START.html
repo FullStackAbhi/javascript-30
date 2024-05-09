@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Scoped CSS Variables and JS</title>
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
+
 <body>
-  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+  <h2>Update CSS Variables with <span class='h1'>JS</span></h2>
 
   <div class="controls">
     <label for="spacing">Spacing:</label>
@@ -22,10 +24,21 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root {
+      --spacing: 10px;
+      --blur: 10px;
+      --base: #ffc60f
+    }
 
-    /*
-      misc styles, nothing to do with CSS variables
-    */
+    img {
+      padding: var(--spacing);
+      filter: blur(var(--blur));
+      background: var(--base);
+    }
+
+    .h1 {
+      color: var(--base)
+    }
 
     body {
       text-align: center;
@@ -46,7 +59,18 @@
   </style>
 
   <script>
+    function handleevent() {
+      const suffix = this.dataset.sizing || ''
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+    }
+    const inputs = document.querySelectorAll('input')
+    console.log(inputs)
+    inputs.forEach(input => input.addEventListener('change', handleevent))
+    inputs.forEach(input => input.addEventListener('mousemove', handleevent))
+
+
   </script>
 
 </body>
+
 </html>
